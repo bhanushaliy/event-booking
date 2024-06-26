@@ -31,11 +31,8 @@ func (e Event) Save() error {
 	}
 	defer stmt.Close()
 	id, err := result.LastInsertId()
-	if err != nil {
-		return err
-	}
 	e.ID = id
-	return nil
+	return err
 }
 
 func GetAllEvents() ([]Event, error) {
