@@ -36,7 +36,7 @@ func (u Users) Save() error {
 	return nil
 }
 
-func (u Users) ValidateCrediantials() error {
+func (u *Users) ValidateCrediantials() error {
 	query := "SELECT id, password FROM users WHERE email = ?"
 	row := db.DB.QueryRow(query, u.Email)
 	var retrievedPassword string
