@@ -13,7 +13,7 @@ type Users struct {
 	Password string `binding:"required"`
 }
 
-func (u Users) Save() error {
+func (u *Users) Save() error {
 	query := "INSERT INTO users(email,password) VALUES(?, ?)"
 	stmt, err := db.DB.Prepare(query)
 	if err != nil {
