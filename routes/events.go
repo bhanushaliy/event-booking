@@ -80,7 +80,7 @@ func createEvent(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"message": "Event Created!", "events": event})
+	context.JSON(http.StatusCreated, gin.H{"message": "Event Created!", "events": event})
 }
 
 // update event by id

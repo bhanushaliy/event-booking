@@ -103,3 +103,33 @@ func (event Event) DeleteEvent() error {
 
 // Exec used when to create or update data
 // query used when to fetch data
+
+func (e Event) Register(userId int64) error {
+	query := "INSERT INTO registrations(event_id, user_id) VALUES(?, ?)"
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+	_, err = stmt.Exec(e.ID, userId)
+	if err != nil {
+		return err
+	}
+	return err
+}
+
+func (e Event) CancelRegistration(userId int64) error {
+	query := "DELETE FROM registrations WHERE event_id = ? and user_id = ?"
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+	_, err = stmt.Exec(e.ID, userId)
+	if err != nil {
+		return err
+	}
+	return err
+}
